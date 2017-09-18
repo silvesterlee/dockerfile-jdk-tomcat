@@ -13,6 +13,12 @@ RUN apt-get -y install vim
 # Install curl  
 RUN apt-get -y install curl  
 
+# Install netstat
+RUN apt-get -y install net-tools
+
+# Install telnet
+RUN apt-get -y install xinetd telnet
+
 # Install linux alias
 RUN cd ~ && git clone https://flyingsam@bitbucket.org/flyingsam/linux_alias.git
 RUN echo 'source ~/linux_alias/bash_aliases' >> ~/.bashrc
