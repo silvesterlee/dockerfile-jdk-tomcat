@@ -66,6 +66,7 @@ RUN cd /tmp/openssl-fips-2.0.10 && ./config && make && make install
 RUN cd /tmp/zlib-1.2.11 && ./configure && make && make install
 RUN cd /tmp/pcre-8.40 && ./configure && make && make install
 RUN cd /tmp/nginx-1.10.2 && ./configure && make && make install
+RUN ln -s /usr/local/lib/libpcre.so.1 /lib
   
 # Expose ports.  
 EXPOSE 8080  
