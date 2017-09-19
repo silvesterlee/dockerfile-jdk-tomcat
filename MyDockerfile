@@ -4,11 +4,11 @@ FROM sam/ubuntu:1.0
 MAINTAINER zing wang "zing.jian.wang@gmail.com"  
   
 # update source  
-RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe"> /etc/apt/sources.list  
+# RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe"> /etc/apt/sources.list  
 RUN apt-get update  
 
 # Install gcc
-apt-get install gcc make
+RUN apt-get install -y build-essential
 
 # Install wget
 RUN apt-get -y install wget
@@ -57,9 +57,19 @@ RUN mv /tmp/zookeeper-3.4.10/ /opt/zookeeper-3.4.10/
 ENV ZK_HOME /opt/zookeeper-3.4.10
 ENV PATH $PATH:$ZK_HOME/bin  
   
+# Install nginx
+RUN cd /tmp && curl -L 'http://nginx.org/download/nginx-1.10.2.tar.gz' | tar -xz
+RUN cd /tmp && curl -L 'http://www.openssl.org/source/openssl-fips-2.0.10.tar.gz' | tar -xz
+RUN cd /tmp && curl -L 'http://zlib.net/zlib-1.2.11.tar.gz' | tar -xz
+RUN cd /tmp && curl -L 'ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.40.tar.gz' | tar -xz
+RUN cd /tmp/openssl-fips-2.0.10 && ./config && make && make install
+RUN cd /tmp/zlib-1.2.11 && ./configure && make && make install
+RUN cd /tmp/pcre-8.40 && ./configure && make && make install
+RUN cd /tmp/nginx-1.10.2 && ./configure && make && make install
   
 # Expose ports.  
 EXPOSE 8080  
+EXPOSE 80  
   
 # Define default command.  
 # ENTRYPOINT service tomcat7 start && tail -f /opt/tomcat7/logs/catalina.out 
