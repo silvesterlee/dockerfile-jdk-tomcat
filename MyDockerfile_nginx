@@ -71,9 +71,11 @@ RUN cd /tmp/pcre-8.40 && ./configure && make && make install
 RUN cd /tmp/nginx-1.10.2 && ./configure && make && make install
 RUN ln -s /usr/local/lib/libpcre.so.1 /lib
   
+ENV NGINX_HOME /usr/local/nginx
+ENV PATH $PATH:$NGINX_HOME/sbin  
+
 # Expose ports.  
-EXPOSE 8080  
-EXPOSE 80  
+EXPOSE 80 8080
   
 # Define default command.  
-# ENTRYPOINT service tomcat7 start && tail -f /opt/tomcat7/logs/catalina.out 
+ENTRYPOINT nginx
