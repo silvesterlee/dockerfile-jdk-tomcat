@@ -5,6 +5,8 @@ MAINTAINER zing wang "zing.jian.wang@gmail.com"
   
 # update source  
 # RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe"> /etc/apt/sources.list  
+ADD sources.list /tmp/
+RUN cat /tmp/sources.list > /etc/apt/sources.list
 RUN apt-get update  
 
 # Install ping
