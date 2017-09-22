@@ -76,8 +76,13 @@ RUN ln -s /usr/local/lib/libpcre.so.1 /lib
 ENV NGINX_HOME /usr/local/nginx
 ENV PATH $PATH:$NGINX_HOME/sbin  
 
+ADD nginx.sh /etc/init.d/nginx
+RUN chmod 755 /etc/init.d/nginx
+
 # Expose ports.  
-EXPOSE 80 8080
+EXPOSE 8080 80
   
 # Define default command.  
-# ENTRYPOINT /usr/local/nginx/sbin/nginx
+ENTRYPOINT service nginx start && tail -f /etc/init.d/nginx
+#ENTRYPOINT service tomcat7 start && tail -f /opt/tomcat7/logs/catalina.out
+#ENTRYPOINT service tomcat7 start

@@ -65,6 +65,7 @@ return 0
 
 case $1 in
 start)
+echo 'tomcat start ....................'
   start
 ;;
 stop)
