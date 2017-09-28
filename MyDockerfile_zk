@@ -69,4 +69,4 @@ RUN chmod 755 /etc/init.d/zookeeper
 EXPOSE 8080  
   
 # Define default command.  
-ENTRYPOINT service tomcat7 start && tail -f /opt/tomcat7/logs/catalina.out
+ENTRYPOINT service zookeeper start && tail -f /opt/zookeeper-3.4.10/bin/zkServer.sh
